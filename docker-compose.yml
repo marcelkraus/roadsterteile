@@ -1,0 +1,25 @@
+version: "2"
+services:
+    apache-php:
+        build: ./.docker/apache-php
+        container_name: roadsterteile-apache-php
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www/html/
+    mysql:
+        image: mysql:latest
+        container_name: roadsterteile-mysql
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: roadsterteile
+            MYSQL_USER: roadsterteile
+            MYSQL_PASSWORD: roadsterteile
+volumes:
+    mysql_data:
